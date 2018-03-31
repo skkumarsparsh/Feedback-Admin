@@ -1,3 +1,32 @@
-<p>
-  login works!
-</p>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row" style="padding: 0 40px 0 40px;">
+      <span class="mdl-layout-title">Admin Console</span>
+    </div>
+  </header>
+  <main class="mdl-layout__content" style="background-color:dimgrey">
+    <div class="page-content" align="center" style="margin-top:12%;">
+      <div style="padding:20px;">
+        <mat-card style="padding:20px;width:24%;padding-top:25px;border-radius:15px;">
+          <mat-form-field>
+            <input matInput placeholder="Username" #username [formControl]="usernameFormControl" required>
+            <mat-error>
+              Username is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Password" type="password" #password [formControl]="passwordFormControl" required>
+            <mat-error>
+              Password is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <div align="center" style="padding-top:10px">
+            <button mat-raised-button color="primary" (click)="login(username.value,password.value)">LOGIN</button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </main>
+</div>
