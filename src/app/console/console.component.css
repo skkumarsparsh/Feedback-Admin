@@ -1,0 +1,40 @@
+.cardnew {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+    transition: 0.3s;
+    width:100%;
+    min-height:375px;
+    cursor:pointer;
+  }
+
+  .cardnew:hover {
+    box-shadow: 4px 8px 16px 4px rgba(0,0,0,0.4);
+  }
+
+  .buttontext {
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color:rgb(63,81,181);
+    padding:10px;
+  }
+
+  .demo-card0 > .mdl-card__title {
+    color: #fff;
+    background:
+      url('/assets/analytics.png') bottom 50% right 30% no-repeat rgb(36, 189, 176);
+    background-size: 45%;
+  }
+
+  .demo-card1 > .mdl-card__title {
+    color: #fff;
+    background:
+      url('/assets/settings-gears.png') bottom 50% right 30% no-repeat rgb(36, 189, 176);
+    background-size: 40%;
+  }
+
+  .demo-card2 > .mdl-card__title {
+    color: #fff;
+    background:
+      url('/assets/database.png') bottom 50% right 30% no-repeat rgb(36, 189, 176);
+    background-size: 40%;
+  }

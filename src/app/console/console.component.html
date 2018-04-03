@@ -10,9 +10,53 @@
   </header>
   <main class="mdl-layout__content">
     <div class="page-content">
-      <p>
-        console works!
-      </p>
+      <div class="row" style="padding:1%">
+        <div class="col-sm-4">
+          <div id="cardcolor" class="demo-card0 mdl-card cardnew" [routerLink]="['/analytics']">
+            <div class="mdl-card__title mdl-card--expand">
+              <h2 class="mdl-card__title-text">Analytics</h2>
+            </div>
+            <div id="textcolor" class="mdl-card__supporting-text">
+              <h5> Click here to see the analytic graph of all the feedbacks. </h5>
+            </div>
+            <div id="bordercolor" class="mdl-card__actions mdl-card--border">
+              <div id="linkcolor" class="buttontext">
+                GO TO ANALYTICS
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div id="cardcolor" class="demo-card1 mdl-card cardnew" [routerLink]="['/settings']">
+            <div class="mdl-card__title mdl-card--expand">
+              <h2 class="mdl-card__title-text">Settings</h2>
+            </div>
+            <div id="textcolor" class="mdl-card__supporting-text">
+              <h5> Click here to configure the settings for the feedback system. </h5>
+            </div>
+            <div id="bordercolor" class="mdl-card__actions mdl-card--border">
+              <div id="linkcolor" class="buttontext">
+                GO TO SETTINGS
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div id="cardcolor" class="demo-card2 mdl-card cardnew" [routerLink]="['/editdatabase']">
+            <div class="mdl-card__title mdl-card--expand">
+              <h2 class="mdl-card__title-text">Edit Database</h2>
+            </div>
+            <div id="textcolor" class="mdl-card__supporting-text">
+              <h5> Click here to view and edit the teacher database. </h5>
+            </div>
+            <div id="bordercolor" class="mdl-card__actions mdl-card--border">
+              <div id="linkcolor" class="buttontext">
+                GO TO DATABASE EDIT
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 </div>
