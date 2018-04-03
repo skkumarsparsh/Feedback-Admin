@@ -1,19 +1,87 @@
-
-
-
-<!-- <div>
-  <canvas baseChart width="400" height="150"
-          [datasets]="radarChartData"
-          [labels]="radarChartLabels"
-          [chartType]="barChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row" style="padding: 0 40px 0 40px;">
+      <span style="padding-right:30px;margin-left:-15px">
+        <button class="mdl-button mdl-js-button mdl-button--icon" [routerLink]="['/adminconsole']">
+          <i class="material-icons">arrow_back</i>
+        </button>
+      </span>
+      <span class="mdl-layout-title">Analytics</span>
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <button mat-button (click)="logout()">Logout</button>
+      </nav>
+    </div>
+  </header>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      <div style="padding:2%">
+        <div style="padding:1%">
+          <mat-card>
+            <div align=center>
+              <p style="font-weight:500;font-size:18px">Select the information below to see appropriate analytics.</p>
+              <br>
+              <div class="row">
+                <div class="col-sm-6">
+                  <mat-form-field>
+                    <mat-select placeholder="Semester" (selectionChange)="firstSelectChanged()" [(value)]="selectValue0">
+                      <mat-option *ngFor="let sem of semester" [value]="sem">
+                        {{ sem }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                  <div *ngIf="firstselected">
+                    <mat-form-field>
+                      <mat-select placeholder="Section" (selectionChange)="secondSelectChanged()" [(value)]="selectValue1">
+                        <mat-option *ngFor="let sec of section" [value]="sec">
+                          {{ sec }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="secondselected">
+                  <br/>
+                  <button mat-raised-button color="primary" (click)="show()">Show Analytics</button>
+                  <br/>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+        <div *ngIf="initial">
+          <div style="padding:1%">
+            <mat-card>
+              <div align=center>
+                <p style="font-weight:500;font-size:18px">Showing Bar Graph for {{selectValue0}} {{selectValue1}}</p>
+                <br>
+                <div>
+                  <canvas baseChart width="400" height="150"
+                          [datasets]="radarChartData"
+                          [labels]="radarChartLabels"
+                          [chartType]="barChartType"></canvas>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+          <div style="padding:1%">
+            <mat-card>
+              <div align=center>
+                <p style="font-weight:500;font-size:18px">Showing Radar Graph for {{selectValue0}} {{selectValue1}}</p>
+                <br>
+                <div>
+                  <canvas baseChart width="400" height="150"
+                          [datasets]="radarChartData"
+                          [labels]="radarChartLabels"
+                          [chartType]="radarChartType"></canvas>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </div>
-<div>
-  <canvas baseChart width="400" height="190"
-          [datasets]="radarChartData"
-          [labels]="radarChartLabels"
-          [chartType]="radarChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
-</div> -->
