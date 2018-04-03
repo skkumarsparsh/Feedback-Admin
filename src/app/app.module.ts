@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AUTH_PROVIDERS } from './auth.service';
 import { LoggedInGuard } from './logged-in.guard';
@@ -15,6 +16,7 @@ import { LoggedInGuard } from './logged-in.guard';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ConsoleComponent } from './console/console.component';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -27,7 +29,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    ConsoleComponent
+    ConsoleComponent,
+    LoginDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -38,11 +41,15 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [
     AUTH_PROVIDERS,
     LoggedInGuard
+  ],
+  entryComponents: [
+    LoginDialogComponent
   ],
   bootstrap: [AppComponent]
 })

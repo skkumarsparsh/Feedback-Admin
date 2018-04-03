@@ -1,3 +1,18 @@
-<p>
-  console works!
-</p>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row" style="padding: 0 40px 0 40px;">
+      <span class="mdl-layout-title">Admin Console</span>
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <button mat-button (click)="logout()">Logout</button>
+      </nav>
+    </div>
+  </header>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      <p>
+        console works!
+      </p>
+    </div>
+  </main>
+</div>
