@@ -38,11 +38,10 @@ export class LoginComponent implements OnInit {
 
   login(username,password) {
     if (!this.authService.login(username, password)) {
-      console.log("Incorrect Credentials")
+      this.openDialog();
     } else {
       this.route.navigate(['/adminconsole']);
     }
-    this.openDialog();
     return false;
   }
 
