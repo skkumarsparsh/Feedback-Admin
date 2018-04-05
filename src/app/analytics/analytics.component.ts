@@ -10,20 +10,30 @@ import { Router } from '@angular/router';
 })
 export class AnalyticsComponent implements OnInit {
 
-  firstselected:boolean;
-  secondselected:boolean;
-  initial:boolean;
+  firstselected0:boolean;
+  secondselected0:boolean;
+  firstselected1:boolean;
+  secondselected1:boolean;
+  showChart:boolean;
   selectValue0;
   selectValue1;
+  selectValue2;
+  selectValue3;
+  displayValue1;
+  displayValue2;
   data;
+  radioValue;
   semester = [];
   section = [];
+  teachers = [];
+  subjects = [];
 
   constructor(private http:Http, private authService:AuthService, private route: Router) {
-    this.firstselected = false;
-    this.secondselected = false
-    this.initial = false;
-    this.section = ['Class A', 'Class B', 'Class C', 'Class D'];
+    this.firstselected0 = false;
+    this.secondselected0 = false;
+    this.firstselected1 = false;
+    this.secondselected1 = false;
+    this.showChart = false;
   }
 
   ngOnInit() {
@@ -33,25 +43,26 @@ export class AnalyticsComponent implements OnInit {
   getData() {
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'});
     let options = new RequestOptions({ headers: headers });
-    this.http.post('http://127.0.0.1:8080/teachers', {}, options).subscribe(res => {
+    this.http.post('http://127.0.0.1:8080/get-s3t', {}, options).subscribe(res => {
       this.data = res.json() || {};
       console.log("Data received from the server - ")
       console.log(this.data);
-      var temp = this.data;
-      var s = [];
-      for(var t in temp) {
-        this.semester.push(t);
-        s.push(temp[t]);
-      }
-      console.log(this.semester)
+      this.semester = this.data["semesters"]
+      this.section = this.data["sections"]
+      this.teachers = this.data["teachers"]
+      this.subjects = this.data["subjects"]
     });
   }
 
   public radarChartLabels:string[] = ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling'];
 
   public radarChartData:any = [
-    {data: [65, 59, 90, 81, 56, 55, 65, 59, 90, 81, 56, 55], label: 'Series A'},
-    {data: [28, 48, 40, 19, 96, 27, 28, 48, 40, 19, 96, 27], label: 'Series B'},
+    {data: [65, 59, 90, 81, 56, 55, 65, 59, 90, 81, 56, 55], label: 'Series A - With a very very very long label'},
+    {data: [28, 48, 40, 19, 96, 27, 28, 48, 40, 19, 96, 27], label: 'Series B - With a very very long label'},
+    {data: [65, 59, 90, 81, 56, 55, 65, 59, 90, 81, 56, 55], label: 'Series A - With a very very very very long label'},
+    {data: [28, 48, 40, 19, 96, 27, 28, 48, 40, 19, 96, 27], label: 'Series B - With a very very very long label'},
+    {data: [65, 59, 90, 81, 56, 55, 65, 59, 90, 81, 56, 55], label: 'Series A - With a very very very very long label'},
+    {data: [28, 48, 40, 19, 96, 27, 28, 48, 40, 19, 96, 27], label: 'Series B - With a very long label'},
   ];
   public barChartType:string = 'bar';
   public radarChartType:string = 'radar';
@@ -62,23 +73,59 @@ export class AnalyticsComponent implements OnInit {
   }
 
   show() {
-    this.initial = true;
+    this.showChart = true;
+    if(this.radioValue == "1") {
+      this.displayValue1 = this.selectValue0;
+      this.displayValue2 = this.selectValue1;
+    } else if(this.radioValue == "2"){
+      this.displayValue1 = this.selectValue2;
+      this.displayValue2 = this.selectValue3;
+    }
   }
 
-  firstSelectChanged() {
-    if(this.firstselected == false) {
-      this.firstselected = true;
-      this.secondselected = false;
+  firstSelectChanged1() {
+    if(this.firstselected0 == false) {
+      this.firstselected0 = true;
+      this.secondselected0 = false;
       this.selectValue1 = null;
     } else {
-      this.secondselected = false;
+      this.secondselected0 = false;
       this.selectValue1 = null;
     }
   }
 
-  secondSelectChanged() {
-    if(this.secondselected == false) {
-      this.secondselected = true;
+  secondSelectChanged1() {
+    if(this.secondselected0 == false) {
+      this.secondselected0 = true;
     } 
+  }
+
+  firstSelectChanged2() {
+    if(this.firstselected1 == false) {
+      this.firstselected1 = true;
+      this.secondselected1 = false;
+      this.selectValue3 = null;
+    } else {
+      this.secondselected1 = false;
+      this.selectValue3 = null;
+    }
+  }
+
+  secondSelectChanged2() {
+    if(this.secondselected1 == false) {
+      this.secondselected1 = true;
+    } 
+  }
+
+  radioChanged() {
+    this.showChart = false;
+    this.firstselected0 = false;
+    this.firstselected1 = false;
+    this.secondselected0 = false;
+    this.secondselected1 = false;
+    this.selectValue0 = null;
+    this.selectValue1 = null;
+    this.selectValue2 = null;
+    this.selectValue3 = null;
   }
 }

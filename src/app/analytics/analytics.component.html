@@ -8,7 +8,7 @@
       </span>
       <span class="mdl-layout-title">Analytics</span>
       <div class="mdl-layout-spacer"></div>
-      <nav class="mdl-navigation mdl-layout--large-screen-only">
+      <nav class="mdl-navigation">
         <button mat-button (click)="logout()">Logout</button>
       </nav>
     </div>
@@ -21,10 +21,17 @@
             <div align=center>
               <p style="font-weight:500;font-size:18px">Select the information below to see appropriate analytics.</p>
               <br>
-              <div class="row">
+              <mat-radio-group [(ngModel)]="radioValue" (change)="radioChanged()">
+                <mat-radio-button value="1"><span style="font-weight:400">Display graphs according to semester and section</span></mat-radio-button>
+                <span style="margin-right:10%;"></span>
+                <mat-radio-button value="2"><span style="font-weight:400">Display graphs according to teacher and subject</span></mat-radio-button>
+              </mat-radio-group>
+              <br/>
+              <br/>
+              <div class="row" *ngIf="radioValue == 1">
                 <div class="col-sm-6">
                   <mat-form-field>
-                    <mat-select placeholder="Semester" (selectionChange)="firstSelectChanged()" [(value)]="selectValue0">
+                    <mat-select placeholder="Semester" (selectionChange)="firstSelectChanged1()" [(value)]="selectValue0">
                       <mat-option *ngFor="let sem of semester" [value]="sem">
                         {{ sem }}
                       </mat-option>
@@ -32,10 +39,10 @@
                   </mat-form-field>
                 </div>
                 <div class="col-sm-6">
-                  <div *ngIf="firstselected">
+                  <div>
                     <mat-form-field>
-                      <mat-select placeholder="Section" (selectionChange)="secondSelectChanged()" [(value)]="selectValue1">
-                        <mat-option *ngFor="let sec of section" [value]="sec">
+                      <mat-select placeholder="Section" (selectionChange)="secondSelectChanged1()" [(value)]="selectValue1" [disabled]="!firstselected0">
+                        <mat-option *ngFor="let sec of section[selectValue0]" [value]="sec">
                           {{ sec }}
                         </mat-option>
                       </mat-select>
@@ -43,7 +50,29 @@
                   </div>
                 </div>
               </div>
-              <div *ngIf="secondselected">
+              <div class="row" *ngIf="radioValue == 2">
+                <div class="col-sm-6">
+                  <mat-form-field>
+                    <mat-select placeholder="Teacher" (selectionChange)="firstSelectChanged2()" [(value)]="selectValue2">
+                      <mat-option *ngFor="let tea of teachers" [value]="tea">
+                        {{ tea }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                  <div>
+                    <mat-form-field>
+                      <mat-select placeholder="Subject" (selectionChange)="secondSelectChanged2()" [(value)]="selectValue3" [disabled]="!firstselected1">
+                        <mat-option *ngFor="let sub of subjects[selectValue2]" [value]="sub">
+                          {{ sub }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="secondselected0 || secondselected1">
                   <br/>
                   <button mat-raised-button color="primary" (click)="show()">Show Analytics</button>
                   <br/>
@@ -51,11 +80,11 @@
             </div>
           </mat-card>
         </div>
-        <div *ngIf="initial">
+        <div *ngIf="showChart">
           <div style="padding:1%">
             <mat-card>
               <div align=center>
-                <p style="font-weight:500;font-size:18px">Showing Bar Graph for {{selectValue0}} {{selectValue1}}</p>
+                <p style="font-weight:500;font-size:18px">Showing Bar Graph for {{displayValue1}} - {{displayValue2}}</p>
                 <br>
                 <div>
                   <canvas baseChart width="400" height="150"
@@ -69,7 +98,7 @@
           <div style="padding:1%">
             <mat-card>
               <div align=center>
-                <p style="font-weight:500;font-size:18px">Showing Radar Graph for {{selectValue0}} {{selectValue1}}</p>
+                <p style="font-weight:500;font-size:18px">Showing Radar Graph for {{displayValue1}} - {{displayValue2}}</p>
                 <br>
                 <div>
                   <canvas baseChart width="400" height="150"
