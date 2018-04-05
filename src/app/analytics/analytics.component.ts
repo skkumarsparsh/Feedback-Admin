@@ -54,16 +54,9 @@ export class AnalyticsComponent implements OnInit {
     });
   }
 
-  public radarChartLabels:string[] = ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling'];
+  public radarChartLabels:string[] = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9', 'Q10', 'Q11', 'Q12'];
 
-  public radarChartData:any = [
-    {data: [65, 59, 90, 81, 56, 55, 65, 59, 90, 81, 56, 55], label: 'Series A - With a very very very long label'},
-    {data: [28, 48, 40, 19, 96, 27, 28, 48, 40, 19, 96, 27], label: 'Series B - With a very very long label'},
-    {data: [65, 59, 90, 81, 56, 55, 65, 59, 90, 81, 56, 55], label: 'Series A - With a very very very very long label'},
-    {data: [28, 48, 40, 19, 96, 27, 28, 48, 40, 19, 96, 27], label: 'Series B - With a very very very long label'},
-    {data: [65, 59, 90, 81, 56, 55, 65, 59, 90, 81, 56, 55], label: 'Series A - With a very very very very long label'},
-    {data: [28, 48, 40, 19, 96, 27, 28, 48, 40, 19, 96, 27], label: 'Series B - With a very long label'},
-  ];
+  public radarChartData:any = [];
   public barChartType:string = 'bar';
   public radarChartType:string = 'radar';
 
@@ -73,17 +66,52 @@ export class AnalyticsComponent implements OnInit {
   }
 
   show() {
-    this.showChart = true;
+    var selectedOption;
     if(this.radioValue == "1") {
       this.displayValue1 = this.selectValue0;
+      this.displayValue1 = this.displayValue1[this.displayValue1.length-1]
       this.displayValue2 = this.selectValue1;
+      this.displayValue2 = this.displayValue2[this.displayValue2.length-1]
+      selectedOption = "semestersection";
     } else if(this.radioValue == "2"){
       this.displayValue1 = this.selectValue2;
       this.displayValue2 = this.selectValue3;
+      selectedOption = "teachersubject";
     }
+    var stuffbeingsent = {
+                      "selectedOption":selectedOption,
+                      "show":[this.displayValue1,this.displayValue2]
+                    }
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'});
+    let options = new RequestOptions({ headers: headers });
+    this.http.post('http://127.0.0.1:8080/get-responses', stuffbeingsent, options).subscribe(res => {
+      this.data = res.json() || {};
+      console.log("Data received from the server - ")
+      console.log(this.data);
+      var responses = this.data["responses"];
+      var t;
+      this.radarChartData = []
+      for(t in responses) {
+        var d,l
+        console.log(responses[t])
+        d = responses[t]['r']
+        if(this.radioValue == "1") {
+          l = responses[t]['teacher'] + " - " + responses[t]['subject'];
+        } else if(this.radioValue == "2") {
+          l = responses[t]['semester'] + " - " + responses[t]['section'];
+        }
+        var obj = new Object({
+          data : d,
+          label : l
+        })
+        this.radarChartData.push(obj)
+      }
+      this.showChart = true;
+    });
   }
 
   firstSelectChanged1() {
+    this.showChart = false;
     if(this.firstselected0 == false) {
       this.firstselected0 = true;
       this.secondselected0 = false;
@@ -95,12 +123,14 @@ export class AnalyticsComponent implements OnInit {
   }
 
   secondSelectChanged1() {
+    this.showChart = false;
     if(this.secondselected0 == false) {
       this.secondselected0 = true;
     } 
   }
 
   firstSelectChanged2() {
+    this.showChart = false;
     if(this.firstselected1 == false) {
       this.firstselected1 = true;
       this.secondselected1 = false;
@@ -112,6 +142,7 @@ export class AnalyticsComponent implements OnInit {
   }
 
   secondSelectChanged2() {
+    this.showChart = false;
     if(this.secondselected1 == false) {
       this.secondselected1 = true;
     } 
