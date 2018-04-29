@@ -9,7 +9,19 @@
       <span class="mdl-layout-title">Settings</span>
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation">
-        <button mat-button (click)="logout()">Logout</button>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <!-- <button mat-menu-item style="padding-right:28px;">
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+          </button> -->
+          <button mat-menu-item (click)="logout()" style="padding-right:28px;">
+            <mat-icon>account_circle</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
       </nav>
     </div>
   </header>

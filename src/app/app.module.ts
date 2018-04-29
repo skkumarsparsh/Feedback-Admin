@@ -12,6 +12,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatMenuModule } from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+
 
 import { ChartsModule } from 'ng2-charts';
 
@@ -25,6 +28,7 @@ import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { SettingsComponent } from './settings/settings.component';
 import { EditDatabaseComponent } from './edit-database/edit-database.component';
+import { EmailInfoComponent } from './email-info/email-info.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -32,7 +36,8 @@ const routes: Routes = [
   { path: 'adminconsole', component: ConsoleComponent, canActivate: [LoggedInGuard] },
   { path: 'analytics', component: AnalyticsComponent, canActivate: [LoggedInGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [LoggedInGuard] },
-  { path: 'editdatabase', component: EditDatabaseComponent, canActivate: [LoggedInGuard] }
+  { path: 'editdatabase', component: EditDatabaseComponent, canActivate: [LoggedInGuard] },
+  { path: 'email-info', component: EmailInfoComponent, canActivate: [LoggedInGuard] }
 ]
 
 
@@ -44,7 +49,8 @@ const routes: Routes = [
     LoginDialogComponent,
     AnalyticsComponent,
     SettingsComponent,
-    EditDatabaseComponent
+    EditDatabaseComponent,
+    EmailInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +66,9 @@ const routes: Routes = [
     ChartsModule,
     MatSelectModule,
     HttpModule,
-    MatRadioModule
+    MatRadioModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [
     AUTH_PROVIDERS,

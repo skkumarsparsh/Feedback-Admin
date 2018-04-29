@@ -4,6 +4,7 @@
     width:100%;
     min-height:375px;
     cursor:pointer;
+    border-radius:15px;
   }
 
   .cardnew:hover {
@@ -28,7 +29,7 @@
   .demo-card1 > .mdl-card__title {
     color: #fff;
     background:
-      url('/assets/settings-gears.png') bottom 50% right 30% no-repeat rgb(36, 189, 176);
+      url('/assets/letter.png') bottom 50% right 30% no-repeat rgb(36, 189, 176);
     background-size: 40%;
   }
 

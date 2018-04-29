@@ -4,7 +4,20 @@
       <span class="mdl-layout-title">Admin Console</span>
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation">
-        <button mat-button (click)="logout()">Logout</button>
+        <!-- <button mat-button (click)="logout()">Logout</button> -->
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item style="padding-right:28px;" [routerLink]="['/settings']">
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+          </button>
+          <button mat-menu-item (click)="logout()" style="padding-right:28px;">
+            <mat-icon>account_circle</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
       </nav>
     </div>
   </header>
@@ -27,16 +40,16 @@
           </div>
         </div>
         <div class="col-sm-4">
-          <div id="cardcolor" class="demo-card1 mdl-card cardnew" [routerLink]="['/settings']">
+          <div id="cardcolor" class="demo-card1 mdl-card cardnew" [routerLink]="['/email-info']">
             <div class="mdl-card__title mdl-card--expand">
-              <h2 class="mdl-card__title-text">Settings</h2>
+              <h2 class="mdl-card__title-text">Send Email</h2>
             </div>
             <div id="textcolor" class="mdl-card__supporting-text">
-              <h5> Click here to configure the settings for the feedback system. </h5>
+              <h5> Click here to send emails to different teachers regarding their feedback results. </h5>
             </div>
             <div id="bordercolor" class="mdl-card__actions mdl-card--border">
               <div id="linkcolor" class="buttontext">
-                GO TO SETTINGS
+                GO TO EMAIL INFORMATION
               </div>
             </div>
           </div>
